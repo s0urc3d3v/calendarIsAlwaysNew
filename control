@@ -1,0 +1,9 @@
+Package: net.techredesign.calendarIsAlwaysNew
+Name: Calendar is Always New
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Replace "No New Notifications" with your most recent calendar entry
+Maintainer: s0urc3
+Author: s0urc3
+Section: Tweaks
