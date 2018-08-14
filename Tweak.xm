@@ -28,7 +28,7 @@
 %new -(EKEvent *) getNewestCalendarEvent {
   int daysToGoAhead = -1;
   int eventListSize = 0;
-  NSArray *eventList = nil;
+  NSArray *eventList;
 
   do{
     daysToGoAhead += 1;
@@ -42,41 +42,16 @@
 
     EKEventStore *eventStore = [[EKEventStore alloc] init];
     NSPredicate *p = [eventStore predicateForEventsWithStartDate:today endDate:future calendars:nil];
-    NSArray *eventList = [eventStore eventsMatchingPredicate:p];
+    eventList = [eventStore eventsMatchingPredicate:p];
     eventListSize = [eventList count];
     NSLog(@"%d", eventListSize);
-    NSString *eventListSizeAsNSString = [NSString stringWithFormat: @"%d", eventListSize];
+    NSString *eventListSizeAsNSString = [NSString stringWithFormat: @"%d", daysToGoAhead];
     NSLog(@"%@", eventListSizeAsNSString);
-    NSString *s = [NSString stringWithFormat: @"%@", eventList];
-    UIAlertView *alerter = [[UIAlertView alloc] initWithTitle:@"hello"
-      message:s
-      delegate:self
-      cancelButtonTitle:@"Done"
-      otherButtonTitles:nil];
-    [alerter show];
 
   } while (eventListSize <= 0 && daysToGoAhead < 5);
 
-  NSString *eventListSizeAsNSString = [NSString stringWithFormat: @"%d", eventListSize];
-  NSString *s = [NSString stringWithFormat: @"%@", eventList];
-
-  NSString *str = [NSString stringWithFormat: @"%@ %@", eventListSizeAsNSString, s];
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"hello"
-    message:str
-    delegate:self
-    cancelButtonTitle:@"Done"
-    otherButtonTitles:nil];
-  [alert show];
-
   if (eventList == nil) return nil;
-
-  UIAlertView *alerter = [[UIAlertView alloc] initWithTitle:@"hello"
-    message:@"Not Nil"
-    delegate:self
-    cancelButtonTitle:@"Done"
-    otherButtonTitles:nil];
-  [alerter show];
-  return eventList[eventListSize + daysToGoAhead];
+  return eventList[0];
 }
 
 %end
