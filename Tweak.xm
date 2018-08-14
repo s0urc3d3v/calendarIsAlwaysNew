@@ -20,15 +20,16 @@
     self.revealHintTitle.string = eventTitle;
   }
   else {
-    self.revealHintTitle.string = @"I was unable to grab the newest event within your bounds, I may not exist.";
+    self.revealHintTitle.string = @"I was unable to grab the newest event within your bounds, it may not exist.";
   }
 }
 
 
 %new -(EKEvent *) getNewestCalendarEvent { //returns true if permission granted!
-  NSDate *heute = [NSDate date];
+  NSDate *today = [NSDate date];
+  NSDate *todayNextYear = [NSDate dateWithTimeInterval:(365*24*60*60) sinceDate:[NSDate date]];
   EKEventStore *eventStore = [[EKEventStore alloc] init];
-  NSPredicate *p = [eventStore predicateForEventsWithStartDate:heute endDate:heute calendars:nil];
+  NSPredicate *p = [eventStore predicateForEventsWithStartDate:today endDate:todayNextYear calendars:nil];
   NSArray *eventList = [eventStore eventsMatchingPredicate:p];
   int eventListSize = [eventList count];
 
