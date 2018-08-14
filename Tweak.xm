@@ -47,10 +47,15 @@
     NSLog(@"%d", eventListSize);
     NSString *eventListSizeAsNSString = [NSString stringWithFormat: @"%d", eventListSize];
     NSLog(@"%@", eventListSizeAsNSString);
-    NSString *eventListAsNSString = [NSString stringWithFormat: @"%@", eventList];
+    NSString *s = [NSString stringWithFormat: @"%@", eventList];
+    UIAlertView *alerter = [[UIAlertView alloc] initWithTitle:@"hello"
+      message:s
+      delegate:self
+      cancelButtonTitle:@"Done"
+      otherButtonTitles:nil];
+    [alerter show];
 
-
-  } while (![eventListAsNSString isEqualToString: nil]);
+  } while (eventListSize <= 0 && daysToGoAhead < 5);
 
   NSString *eventListSizeAsNSString = [NSString stringWithFormat: @"%d", eventListSize];
   NSString *s = [NSString stringWithFormat: @"%@", eventList];
@@ -63,7 +68,7 @@
     otherButtonTitles:nil];
   [alert show];
 
-  if (eventListSize <= 0 || eventList == nil) return nil;
+  if (eventList == nil) return nil;
 
   UIAlertView *alerter = [[UIAlertView alloc] initWithTitle:@"hello"
     message:@"Not Nil"
@@ -71,7 +76,7 @@
     cancelButtonTitle:@"Done"
     otherButtonTitles:nil];
   [alerter show];
-  return eventList[eventListSize - 1];
+  return eventList[eventListSize + daysToGoAhead];
 }
 
 %end
